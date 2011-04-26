@@ -1,0 +1,42 @@
+{
+    "speficication_version": "0.1",
+    "deployment_version": "1.0",
+    "nodes": [
+        {
+            "Name": "Master DB",
+            "Description": "This node will host the Master DB",
+            "Provider": "Rackspace",
+            "image": "49",
+            "machine": "2",
+            "zone": "1",
+            "Roles": [
+                "role[master_db]"
+            ],
+            "step": 1
+        },
+        {
+            "Name": "Slave DB",
+            "Description": "This node will host the Slave DB",
+            "Provider": "Rackspace",
+            "image": "49",
+            "machine": "2",
+            "zone": "1",
+            "Roles": [
+                "role[slave_db]"
+            ],
+            "step": 2
+        },
+        {
+            "Name": "WebApp",
+            "Description": "The Apache web server and our App",
+            "Provider": "EC2",
+            "image": "ami-014da868",
+            "machine": "c1.xlarge",
+            "zone": "us-east-1",
+            "Roles": [
+                "role[frontend]"
+            ],
+            "step": 2
+        }
+    ]
+}
