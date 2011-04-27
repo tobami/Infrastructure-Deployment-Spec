@@ -56,3 +56,5 @@ An example of how the specification could look like (from example.json):
 ```
 
 Go to the [Wiki](https://github.com/tobami/Infrastructure-Deployment-Spec/wiki) and help in defining this specification!
+
+This work is licensed under the [Creative Commons Attribution-ShareAlike 3.0 Unported License](http://creativecommons.org/licenses/by-sa/3.0/)
