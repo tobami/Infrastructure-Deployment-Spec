@@ -8,23 +8,23 @@
   <style type="text/css">
     body {
       margin-top: 1.0em;
-      background-color: #54d24b;
+      background-color: white;
       font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #ffffff;
+      color: black;
     }
     #container {
       margin: 0 auto;
       width: 700px;
     }
-    h1 { font-size: 3.8em; color: #ab2db4; margin-bottom: 3px; }
+    h1 { font-size: 2.5em; color: #509FFF; margin-bottom: 3px; }
     h1 .small { font-size: 0.4em; }
     h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #ab2db4; }
-    h3 { text-align: center; color: #ab2db4; }
-    a { color: #ab2db4; }
+    h2 { font-size: 1.5em; color: #509FFF; }
+    h3 { text-align: center; color: #509FFF; }
+    a { color: #509FFF; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
     .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
+    pre { background: #EEEEEE; color: #E22068; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
   </style>
@@ -42,23 +42,89 @@
         <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
     </div>
 
-    <h1><a href="http://github.com/tobami/Infrastructure-Deployment-Spec">Infrastructure-Deployment-Spec</a>
+    <h1><a href="http://github.com/tobami/Infrastructure-Deployment-Spec">Infrastructure Deployment Specification</a>
       <span class="small">by <a href="http://github.com/tobami">tobami</a></span></h1>
 
     <div class="description">
-      Design of a specification for automation of infrastructure deployments
+      Design of a specification for the automation of infrastructure deployments
     </div>
 
     <p>This project aims to define a tool- and cloud-independent specification to automate infrastructure provisioning, which, together with a Configuration Managment System like Chef or Puppet should for the first time fully deliver on the promise of "Infrastructure as code".
 
 Amazon's Web Services recent outage has paradoxically highlighted the need for a tool like AWS CouldFormation that is vendor independent.
+    </p>
+    <p>
+There are already Open Source cloud-agnostic libraries for cloud APIs (Fog, libcloud...), and several tools that make use of it (Chef's knife, Spiceweasel) but a tool-independent infrastructure specification is still missing.
+    </p>
 
-There are already Open Source cloud-agnostic libraries for cloud APIs (Fog, libcloud...), and several tools that make use of it (Chef's knife, Spiceweasel) but a tool-independent infrastructure specification is still missing.</p><h2>License</h2>
+    <p>Go to the <a href="https://github.com/tobami/Infrastructure-Deployment-Spec/wiki">Wiki</a> and help in defining this specification!
+    </p>
+    <h2>Definition of a Node resource</h2>
+    <ul>
+        <li>Name</li>
+        <li>Description</li>
+        <li>Provider: Cloud provider</li>
+        <li>Image: OS Image</li>
+        <li>Machine: Size</li>
+        <li>Zone: Availability zone</li>
+        <li>Roles: List of roles that the Configuration Management System should apply</li>
+        <li>Step: defines dependencies. All nodes in a step may be configured in parallel</li>
+    </ul>
+    <h2>Example Deployment Code</h2>
+    <pre>{
+    "speficication_version": "0.1",
+    "deployment_version": "1.0",
+    "name": "Web App",
+    "description": "A full Web application, master DB and master slave deployment",
+    "nodes": [
+        {
+            "name": "Master DB",
+            "description": "This node will host the Master DB",
+            "provider": "Rackspace",
+            "image": "49",
+            "machine": "2",
+            "zone": "1",
+            "roles": [
+                "role[master_db]"
+            ],
+            "step": 1
+        },
+        {
+            "name": "Slave DB",
+            "description": "This node will host the Slave DB",
+            "provider": "Rackspace",
+            "image": "49",
+            "machine": "2",
+            "zone": "1",
+            "roles": [
+                "role[slave_db]"
+            ],
+            "step": 2
+        },
+        {
+            "name": "WebApp",
+            "description": "The Apache web server and our App",
+            "provider": "EC2",
+            "image": "ami-014da868",
+            "machine": "c1.xlarge",
+            "zone": "us-east-1",
+            "roles": [
+                "role[frontend]"
+            ],
+            "step": 2
+        }
+    ]
+}
+</pre>
+<h2>License</h2>
 <p>http://creativecommons.org/licenses/by-sa/3.0/</p>
 <h2>Authors</h2>
-<p>Miquel Torres (tobami@googlemail.com)<br/><br/>      </p>
+<p>Miquel Torres (tobami@googlemail.com)
+<br/>
+<br/>      </p>
 <h2>Contact</h2>
-<p>Miquel Torres (tobami@googlemail.com)<br/>      </p>
+<p>Miquel Torres (tobami@googlemail.com)
+<br/>      </p>
 
 
     <h2>Download</h2>
