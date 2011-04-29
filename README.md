@@ -14,13 +14,14 @@ An example of how the specification could look like (from example.json):
     "deployment_version": "1.0",
     "name": "Web App",
     "description": "A full Web application, master DB and master slave deployment",
+    "environment": "production",
     "nodes": [
         {
             "name": "Master DB",
             "description": "This node will host the Master DB",
             "provider": "Rackspace",
             "image": "49",
-            "machine": "2",
+            "size": "2",
             "zone": "1",
             "roles": [
                 "role[master_db]"
@@ -32,7 +33,7 @@ An example of how the specification could look like (from example.json):
             "description": "This node will host the Slave DB",
             "provider": "Rackspace",
             "image": "49",
-            "machine": "2",
+            "size": "2",
             "zone": "1",
             "roles": [
                 "role[slave_db]"
@@ -44,11 +45,16 @@ An example of how the specification could look like (from example.json):
             "description": "The Apache web server and our App",
             "provider": "EC2",
             "image": "ami-014da868",
-            "machine": "c1.xlarge",
+            "size": "c1.xlarge",
             "zone": "us-east-1",
             "roles": [
                 "role[frontend]"
             ],
+            "default_attributes" {
+                "php": {
+                    "memory_limit": "256M"
+                }
+            },
             "step": 2
         }
     ]
