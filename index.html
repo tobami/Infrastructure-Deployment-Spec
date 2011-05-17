@@ -4,7 +4,8 @@
   <meta charset='utf-8'>
 
   <title>tobami/Infrastructure-Deployment-Spec @ GitHub</title>
-
+  <script src="http://yandex.st/highlightjs/5.16/highlight.min.js"></script>
+  <link rel="stylesheet" href="http://yandex.st/highlightjs/5.16/styles/github.min.css">
   <style type="text/css">
     body {
       margin-top: 1.0em;
@@ -24,10 +25,30 @@
     a { color: #509FFF; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
     .download { float: right; }
-    pre { background: #EEEEEE; color: #E22068; padding: 15px;}
+    table {
+        border-collapse: collapse;
+        margin: 20px 0 0;
+        padding: 0;
+    }
+    tr {
+        background-color: #FFFFFF;
+        border-top: 1px solid #CCCCCC;
+        margin: 0;
+        padding: 0;
+    }
+    th, td {
+        border: 1px solid #CCCCCC;
+        margin: 0;
+        padding: 6px 13px;
+        text-align: left;
+    }
+    tr:nth-child(2n) {
+        background-color: #F8F8F8;
+    }
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
   </style>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
 <body>
@@ -49,9 +70,7 @@
       Design of a specification for the automation of infrastructure deployments
     </div>
 
-    <p>This project aims to define a tool- and cloud-independent specification to automate infrastructure provisioning, which, together with a Configuration Managment System like Chef or Puppet should for the first time fully deliver on the promise of "Infrastructure as code".
-
-Amazon's Web Services recent outage has paradoxically highlighted the need for a tool like AWS CouldFormation that is vendor independent.
+    <p>This project aims to define a tool- and cloud-independent specification to automate infrastructure provisioning, which, together with a Configuration Managment System like Chef or Puppet should for the first time fully deliver on the promise of <b>Infrastructure as code</b>.
     </p>
     <p>
 There are already Open Source cloud-agnostic libraries for cloud APIs (Fog, libcloud...), and several tools that make use of it (Chef's knife, Spiceweasel) but a tool-independent infrastructure specification is still missing.
@@ -60,21 +79,21 @@ There are already Open Source cloud-agnostic libraries for cloud APIs (Fog, libc
     <p>Go to the <a href="https://github.com/tobami/Infrastructure-Deployment-Spec/wiki">Wiki</a> and help in defining this specification!
     </p>
     <h2>Definition of a Node resource</h2>
-    <ul>
-        <li>Name</li>
-        <li>Description</li>
-        <li>Provider: Cloud provider</li>
-        <li>Image: OS Image</li>
-        <li>Machine: Size</li>
-        <li>Zone: Availability zone</li>
-        <li>Roles: List of roles that the Configuration Management System should apply</li>
-        <li>Step: defines dependencies. All nodes in a step may be configured in parallel</li>
-    </ul>
+    <table>
+        <tr><th>Key</th><th>Value</th></tr>
+        <tr><td>name</td><td>ASCII string</td></tr>
+        <tr><td>description</td><td>Text describing the node</td></tr>
+        <tr><td>provider</td><td>Cloud provider</td></tr>
+        <tr><td>image</td><td>OS Image</td></tr>
+        <tr><td>size</td><td>VM Size/Type</td></tr>
+        <tr><td>zone</td><td>Availability Zone</td></tr>
+        <tr><td>roles</td><td>Array of roles that the Configuration Management System should apply</td></tr>
+        <tr><td>attributes</td><td>Associative array of node attributes that overwrite defaults</td></tr>
+    </table>
     <h2>Example Deployment Code</h2>
-    <pre>{
-    "speficication_version": "0.1",
-    "deployment_version": "1.0",
+    <pre><code>{
     "name": "Web App",
+    "version": "1.0",
     "description": "A full Web application, master DB and master slave deployment",
     "environment": "production",
     "nodes": [
@@ -87,8 +106,7 @@ There are already Open Source cloud-agnostic libraries for cloud APIs (Fog, libc
             "zone": "1",
             "roles": [
                 "role[master_db]"
-            ],
-            "step": 1
+            ]
         },
         {
             "name": "Slave DB",
@@ -99,8 +117,7 @@ There are already Open Source cloud-agnostic libraries for cloud APIs (Fog, libc
             "zone": "1",
             "roles": [
                 "role[slave_db]"
-            ],
-            "step": 2
+            ]
         },
         {
             "name": "WebApp",
@@ -112,34 +129,25 @@ There are already Open Source cloud-agnostic libraries for cloud APIs (Fog, libc
             "roles": [
                 "role[frontend]"
             ],
-            "default_attributes" {
+            "attributes" {
                 "php": {
                     "memory_limit": "256M"
                 }
-            },
-            "step": 2
+            }
         }
     ]
 }
-</pre>
+</code></pre>
 <h2>License</h2>
 <p>http://creativecommons.org/licenses/by-sa/3.0/</p>
 <h2>Authors</h2>
-<p>Miquel Torres (tobami@googlemail.com)
-<br/>
-<br/>      </p>
+<p>Miquel Torres (tobami@googlemail.com)</p>
+<p>Grig Gheorghiu (grig.gheorghiu@gmail.com)</p>
 <h2>Contact</h2>
-<p>Miquel Torres (tobami@googlemail.com)
-<br/>      </p>
-
+<p>Miquel Torres (tobami@googlemail.com)</p>
 
     <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/tobami/Infrastructure-Deployment-Spec/zipball/master">zip</a> or
-      <a href="http://github.com/tobami/Infrastructure-Deployment-Spec/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
+    <p>You can clone the project with <a href="http://git-scm.com">Git</a>
       by running:
       <pre>$ git clone git://github.com/tobami/Infrastructure-Deployment-Spec</pre>
     </p>
@@ -149,7 +157,5 @@ There are already Open Source cloud-agnostic libraries for cloud APIs (Fog, libc
     </div>
 
   </div>
-
-  
 </body>
 </html>
