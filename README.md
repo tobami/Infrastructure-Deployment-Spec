@@ -11,7 +11,6 @@ An example of how the specification could look like (from example.json):
 ```javascript
 {
     "speficication_version": "0.1",
-    "deployment_version": "1.0",
     "name": "Web App",
     "description": "A full Web application, master DB and master slave deployment",
     "environment": "production",
@@ -25,8 +24,7 @@ An example of how the specification could look like (from example.json):
             "zone": "1",
             "roles": [
                 "role[master_db]"
-            ],
-            "step": 1
+            ]
         },
         {
             "name": "Slave DB",
@@ -37,8 +35,7 @@ An example of how the specification could look like (from example.json):
             "zone": "1",
             "roles": [
                 "role[slave_db]"
-            ],
-            "step": 2
+            ]
         },
         {
             "name": "WebApp",
@@ -50,12 +47,11 @@ An example of how the specification could look like (from example.json):
             "roles": [
                 "role[frontend]"
             ],
-            "default_attributes" {
+            "attributes" {
                 "php": {
                     "memory_limit": "256M"
                 }
-            },
-            "step": 2
+            }
         }
     ]
 }

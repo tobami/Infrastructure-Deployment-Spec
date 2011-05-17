@@ -1,6 +1,5 @@
 {
     "speficication_version": "0.1",
-    "deployment_version": "1.0",
     "name": "Web App",
     "description": "A full Web application, master DB and master slave deployment",
     "environment": "production",
@@ -14,8 +13,7 @@
             "zone": "1",
             "roles": [
                 "role[master_db]"
-            ],
-            "step": 1
+            ]
         },
         {
             "name": "Slave DB",
@@ -26,8 +24,7 @@
             "zone": "1",
             "roles": [
                 "role[slave_db]"
-            ],
-            "step": 2
+            ]
         },
         {
             "name": "WebApp",
@@ -39,12 +36,11 @@
             "roles": [
                 "role[frontend]"
             ],
-            "default_attributes" {
+            "attributes" {
                 "php": {
                     "memory_limit": "256M"
                 }
-            },
-            "step": 2
+            }
         }
     ]
 }
