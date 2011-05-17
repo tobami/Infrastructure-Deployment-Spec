@@ -1,6 +1,6 @@
 {
-    "speficication_version": "0.1",
     "name": "Web App",
+    "version": "1.0",
     "description": "A full Web application, master DB and master slave deployment",
     "environment": "production",
     "nodes": [

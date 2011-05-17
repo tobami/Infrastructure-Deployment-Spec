@@ -6,12 +6,14 @@ Amazon's Web Services [recent outage](http://agilesysadmin.net/ec2-outage-lesson
 
 There are already Open Source cloud-agnostic libraries for cloud APIs ([Fog](https://github.com/geemus/fog), [libcloud](http://incubator.apache.org/libcloud/)...), and several tools that make use of it (Chef's knife, [Spiceweasel](https://github.com/mattray/spiceweasel)) but a tool-independent infrastructure specification is still missing.
 
-An example of how the specification could look like (from example.json):
+Deployments are defined in JSON, following the same syntax as Chef's nodes, roles and cookbooks.
+
+An example of the specification draft (from example.json):
 
 ```javascript
 {
-    "speficication_version": "0.1",
     "name": "Web App",
+    "version": "1.0",
     "description": "A full Web application, master DB and master slave deployment",
     "environment": "production",
     "nodes": [
