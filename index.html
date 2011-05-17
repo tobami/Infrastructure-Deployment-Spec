@@ -69,14 +69,16 @@
       Design of a specification for the automation of infrastructure deployments
     </div>
 
-    <p>This project aims to define a tool- and cloud-independent specification to automate infrastructure provisioning, which, together with a Configuration Managment System like Chef or Puppet should for the first time fully deliver on the promise of <b>Infrastructure as code</b>.
+    <p>This project aims to define a tool- and cloud-independent specification to automate infrastructure provisioning, which, together with a Configuration Managment System like <a href="http://wiki.opscode.com/display/chef/Home">Chef</a> or <a href="http://projects.puppetlabs.com/projects/puppet/wiki">Puppet</a> should for the first time fully deliver on the promise of <b>Infrastructure as code</b>.
     </p>
     <p>
-There are already Open Source cloud-agnostic libraries for cloud APIs (Fog, libcloud...), and several tools that make use of it (Chef's knife, Spiceweasel) but a tool-independent infrastructure specification is still missing.
+There are already Open Source cloud-agnostic libraries for cloud APIs (<a href="https://github.com/geemus/fog">fog</a>, <a href="http://incubator.apache.org/libcloud/">libcloud</a>...), and several tools that make use of it (Chef's knife, Spiceweasel) but a tool-independent infrastructure specification is still missing.
     </p>
 
     <p>Go to the <a href="https://github.com/tobami/Infrastructure-Deployment-Spec/wiki">Wiki</a> and help in defining this specification!
     </p>
+    <h2>Format</h2>
+    <p>Deployments are defined in JSON, following the same syntax as Chef's nodes, roles and cookbooks.</p>
     <h2>Definition of a Node resource</h2>
     <table>
         <tr><th>Key</th><th>Value</th></tr>
